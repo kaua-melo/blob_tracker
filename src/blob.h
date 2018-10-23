@@ -12,6 +12,9 @@ class Blob
 		// VARIABLES
 		ofxCvBlob	blob;
 		int 		ID;
+
+		ofVec2f		p_pos;
+		//ofVec2f		c_pos;
 		ofVec2f		vel;
 
 
@@ -20,6 +23,7 @@ class Blob
 		Blob(ofxCvBlob b); // Constructor
 
 		void draw(int x, int y);
+		void calcVel();
 
 	private:	
 };

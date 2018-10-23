@@ -139,7 +139,7 @@ void ofApp::draw(){
     colorImg_crop.draw(700, 400);
 
 
-    bTracker.draw(20,20);
+    bTracker.draw(360,20);
 
 	// Drawing each blob individually.
     //for (int i = 0; i < bTracker.cBlobs.size(); i++) 

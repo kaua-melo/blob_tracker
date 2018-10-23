@@ -38,6 +38,9 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
     // Set IDS
     setIDs();
 
+    // Calculate blobs' velocities
+    calcVelocities();
+
     // Update the previous frame blobs to the current frame
     updatePreviousBlobs();
 }
@@ -149,6 +152,10 @@ void BlobTracker::matchIDs_less_than_previous(){
         if(indexOfTheClosestBlob != -1)
         {
             cBlobs[c_i].ID = pBlobs[indexOfTheClosestBlob].ID;
+            
+            // Set what was its previous position so we can calculate its velocity later
+            cBlobs[c_i].p_pos.set( pBlobs[indexOfTheClosestBlob].blob.centroid.x,
+                                   pBlobs[indexOfTheClosestBlob].blob.centroid.y  );
         }
     }
 
@@ -204,6 +211,10 @@ void BlobTracker::matchIDs_more_or_equal_than_previous(){
         if(indexOfTheClosestBlob != -1)
         {
             cBlobs[indexOfTheClosestBlob].ID = pBlobs[p_i].ID ;
+
+            // Set what was its previous position so we can calculate its velocity later
+            cBlobs[indexOfTheClosestBlob].p_pos.set( pBlobs[p_i].blob.centroid.x,
+                                                     pBlobs[p_i].blob.centroid.y  );            
         }
     }
 
@@ -235,7 +246,11 @@ void BlobTracker::draw(int x, int y){
 }
 
 void BlobTracker::calcVelocities(){
-    
+
+    for(int i=0; i<cBlobs.size(); i++){
+        cBlobs[i].calcVel();
+    }
+
 }
 
 
