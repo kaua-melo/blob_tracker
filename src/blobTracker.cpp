@@ -227,6 +227,14 @@ void BlobTracker::updatePreviousBlobs(){
 }
 
 
+void BlobTracker::draw(int x, int y){
+    for(int i=0; i<cBlobs.size(); i++)
+    {
+        cBlobs[i].draw(x, y);
+    }
+
+}
+
 
 
 

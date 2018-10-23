@@ -46,7 +46,7 @@ class BlobTracker
 		// 
 		void updatePreviousBlobs();
 
-		void draw();
+		void draw(int x, int y);
 		void name();
 
 	private:	

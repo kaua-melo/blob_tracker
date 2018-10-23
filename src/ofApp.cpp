@@ -48,14 +48,14 @@ void ofApp::setup(){
 	//grayBackground.allocate(320,240);
 	//grayDiff.allocate(320,240);
 
-	threshold = 20;
+	threshold = 90;
     saveBackground = true;    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	ofBackground(100,0,100);
+	ofBackground(50, 50, 50);
 
     bool newFrame = false;
 
@@ -103,7 +103,7 @@ void ofApp::update(){
 
 
         // Find the blobs in the grayDiff image
-        bTracker.findBlobs(grayDiff, 10, (width*height)/3, 3, false);
+        bTracker.findBlobs(grayDiff, 10, (width*height)/3, 5, false);
 
         // Find blobs
         //contourFinder.findContours(grayDiff, 10, (width*height)/3, 3, false);
@@ -138,13 +138,14 @@ void ofApp::draw(){
 
     colorImg_crop.draw(700, 400);
 
-	// Drawing each blob individually.
-    for (int i = 0; i < bTracker.cBlobs.size(); i++) 
-    {
-        bTracker.cBlobs[i].draw(20,20);
-    }
 
-    
+    bTracker.draw(20,20);
+
+	// Drawing each blob individually.
+    //for (int i = 0; i < bTracker.cBlobs.size(); i++) 
+    //{
+    //    bTracker.cBlobs[i].draw(20,20);
+    //}
 
 	// Report:
 	ofSetHexColor(0xffffff);
