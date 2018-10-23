@@ -7,11 +7,15 @@
 Blob::Blob(){
     //cout<<"created a BLOB! "<<endl;
     ID = -1;
+    
+    vel.set(0, 0);
 }
 
 Blob::Blob(ofxCvBlob b){
     blob = b;
     ID = -1;
+
+    vel.set(0, 0);
 }
 
 

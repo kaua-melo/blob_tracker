@@ -43,8 +43,14 @@ class BlobTracker
 		//	the number of blobs in the current frame is smaller than the previous frame.
 		void matchIDs_less_than_previous();
 
-		// 
+		// Set the vector of previous blobs to the vector with blobs detected so our function can work fine 
+		//	the next iteration.
 		void updatePreviousBlobs();
+
+		// Calculate blobs' velocities
+		void calcVelocities();
+
+		
 
 		void draw(int x, int y);
 		void name();

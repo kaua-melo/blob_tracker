@@ -8,10 +8,11 @@
 class Blob
 {
 	public:
-	
+
 		// VARIABLES
 		ofxCvBlob	blob;
 		int 		ID;
+		ofVec2f		vel;
 
 
 		// METHODS

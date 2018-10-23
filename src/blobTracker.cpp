@@ -112,8 +112,7 @@ void BlobTracker::setIDs(){
 }
 
 
-void BlobTracker::matchIDs_less_than_previous()
-{
+void BlobTracker::matchIDs_less_than_previous(){
     // Go through the blobs of the current frame 
     for( int c_i=0; c_i<cBlobs.size(); c_i++ )
     {
@@ -221,6 +220,7 @@ void BlobTracker::matchIDs_more_or_equal_than_previous(){
     }       
 }
 
+
 void BlobTracker::updatePreviousBlobs(){
     pBlobs.clear();
     pBlobs = cBlobs;
@@ -232,9 +232,11 @@ void BlobTracker::draw(int x, int y){
     {
         cBlobs[i].draw(x, y);
     }
-
 }
 
+void BlobTracker::calcVelocities(){
+    
+}
 
 
 
