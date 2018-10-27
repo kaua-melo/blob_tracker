@@ -38,6 +38,10 @@ void ofApp::setup(){
 
         colorImg.allocate( video.getWidth(), video.getHeight() );
 
+        // Keeping the video aspect ratio
+        width  = 320; 
+        height = 320/( video.getWidth() / video.getHeight() );  
+
 	#endif
 
 	threshold = 76;

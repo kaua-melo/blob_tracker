@@ -3,9 +3,7 @@
 
 TODO
 --------------
-- Organise code, please.
-	.Check font size thing.
-	-Constructor
+-
 
 
 NEEDS
@@ -16,5 +14,6 @@ NEEDS
 DONE
 --------------
 - Track blobs velocity.
+- Organise code, please.
 
 
