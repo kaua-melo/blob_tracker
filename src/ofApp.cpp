@@ -1,18 +1,15 @@
 #include "ofApp.h"
 #include "blobTracker.h"
 
-// Blob Tracker
-/*
-    TODO:
-        .Store blobs in an array.
-
-*/
 
 //--------------------------------------------------------------
 void ofApp::setup(){
 	// The dimensions of the camera images to be displayed.
-    width  = 320;
-    height = 180;//240;
+    width  = 320; // 640;
+    height = 240; // 360; 
+
+    bTracker = new BlobTracker(1000, true, false); 
+    //lobTracker(int mxD, bool calculateVel, bool d); -> (maxDistance, calculateVel?, debug?)
 
     // Sets the verbosity - this can be useful for debugging the video grabber interface. you can set the verbosity and then try initGrabber();
     #ifdef _USE_LIVE_VIDEO
@@ -33,8 +30,8 @@ void ofApp::setup(){
         colorImg.allocate( camera.getWidth(), camera.getHeight() );
 
     #else
-        //video.load("dots.mp4");
         video.load("movingShapes.mp4");
+        //video.load("velocity.mp4");
 
         video.play();
         video.setLoopState(OF_LOOP_NORMAL);
@@ -43,19 +40,14 @@ void ofApp::setup(){
 
 	#endif
 
-    //colorImg.allocate( camera.getWidth(), camera.getHeight() );
-	//grayImg.allocate( width, height );
-	//grayBackground.allocate(320,240);
-	//grayDiff.allocate(320,240);
-
-	threshold = 90;
+	threshold = 76;
     saveBackground = true;    
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 
-	ofBackground(50, 50, 50);
+	ofBackground(30);
 
     bool newFrame = false;
 
@@ -80,8 +72,8 @@ void ofApp::update(){
 
 
         // The line below outputs the following message on the console: "[notice ] ofxCvColorImage: setFromPixels(): reallocating to match dimensions: 320 240"
-        // You don't know how to remove it :/  Someone had the same issue in the forum: https://forum.openframeworks.cc/t/ofxcvcolorimage-resize-reallocation/16870
-        // AN IDEA: Try using ofxCvIamge instead of ofxCvColorImage
+        // Not sure how to remove it :/  Someone had the same issue in the forum: https://forum.openframeworks.cc/t/ofxcvcolorimage-resize-reallocation/16870
+        // *An idea: Try using ofxCvIamge instead of ofxCvColorImage
         colorImg.resize( width, height );  
 
         // grayImg gets the gray scale of the camera's frame.
@@ -103,17 +95,12 @@ void ofApp::update(){
 
 
         // Find the blobs in the grayDiff image
-        bTracker.findBlobs(grayDiff, 10, (width*height)/3, 5, false);
-
-        // Find blobs
-        //contourFinder.findContours(grayDiff, 10, (width*height)/3, 3, false);
+        bTracker->findBlobs(grayDiff, 10, (width*height)/3, 5, false);
         // (ofxCvGrayscaleImage &input, 
         //  int minArea, 
         //  int maxArea, 
         //  int nConsidered, -> maximum number of blobs to be considered
-        //  bool bFindHoles, 
-        //  bool bUseApproximation=true)
-        
+        //  bool bFindHoles       
     }
 
 }
@@ -131,21 +118,18 @@ void ofApp::draw(){
 
     #endif          
     
-	colorImg.draw(20,20);
+	colorImg.draw(20, 20);
+    //colorImg.draw(20, 20 + 360 + 218); 
     grayImg.draw(360,20);
  	grayBackground.draw(20,280);
 	grayDiff.draw(360,280);   
 
     colorImg_crop.draw(700, 400);
 
+    // Draw blobs
+    bTracker->drawContainers(360, 20); //20, 20 + 360 + 218); // 360,20);
+    bTracker->drawVelocities(360, 20); //20, 20 + 360 + 218); // 360,20);
 
-    bTracker.draw(360,20);
-
-	// Drawing each blob individually.
-    //for (int i = 0; i < bTracker.cBlobs.size(); i++) 
-    //{
-    //    bTracker.cBlobs[i].draw(20,20);
-    //}
 
 	// Report:
 	ofSetHexColor(0xffffff);
@@ -154,7 +138,6 @@ void ofApp::draw(){
 			  << "threshold " << threshold << " (press: arrow up/down)" << endl
 			  << "num blobs found " << contourFinder.nBlobs << ", fps: " << ofGetFrameRate();
 	ofDrawBitmapString(reportStr.str(), 20, 600); 
-
 }
 
 //--------------------------------------------------------------

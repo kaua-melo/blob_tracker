@@ -45,7 +45,7 @@ class ofApp : public ofBaseApp{
         ofxCvContourFinder 		previousContourFinder;
         ofxCvContourFinder 		contourFinder;
 
-		BlobTracker				bTracker;
+		BlobTracker				*bTracker;
 
 		int	threshold;
 		bool saveBackground;		

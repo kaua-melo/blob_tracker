@@ -3,15 +3,15 @@
 #include "BlobTracker.h"
 #include "Blob.h"
 
-BlobTracker::BlobTracker(){
-    //cout<<"created blobTracker!"<<endl;
+BlobTracker::BlobTracker(int mxD, bool calculateVel, bool d){
+    //if(debug)     cout<< "n blobs detected: " << cBlobs.size() <<endl;
 
     currentMaxID = 0;
-    maxDistance = 1000;
+    maxDistance  = mxD; 
 
-    debug = false;
+    debug = d; 
+    calcVel = calculateVel;
 }
-
 
 
 void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, int max_n_blobs, bool findHoles)
@@ -30,16 +30,15 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
     cBlobs.clear();
 
     // Pushing each blob to our vector of Blobs
-    for( int i=0; i<contourFinder.nBlobs; i++ )
-    {
+    for( int i=0; i<contourFinder.nBlobs; i++ ){
         cBlobs.push_back( Blob(contourFinder.blobs[i]) );
     }
 
     // Set IDS
     setIDs();
 
-    // Calculate blobs' velocities
-    calcVelocities();
+    // Calculate blobs' velocities if desired
+    if(calcVel) calcVelocities();
 
     // Update the previous frame blobs to the current frame
     updatePreviousBlobs();
@@ -48,36 +47,33 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
 
 void BlobTracker::setIDs(){
 
-    if(debug) 
-        cout<< "n blobs detected: " << cBlobs.size() <<endl;
+    if(debug)         cout<< "n blobs detected: " << cBlobs.size() <<endl;
 
-    // There are 4 possibilities:
-    // 1. There are no blobs in the scene
-    if( cBlobs.size() == 0 )
-    {
-        if(debug) 
-            cout<< "NO BLOBS IN THE SCENE!" <<endl;
+    // THERE ARE 4 POSSIBILITIES:
+
+    // 1. There are no blobs in the scene ---------------------------------------
+    if( cBlobs.size() == 0 ){
+        if(debug)     cout<< "NO BLOBS IN THE SCENE!" <<endl;
 
         currentMaxID = 0;
     }
+    // --------------------------------------------------------------------------
 
-    // 2. N blobs in the current frame > N blobs in the previous frame.
+
+    // 2. N blobs in the current frame > N blobs in the previous frame ----------
     else if( cBlobs.size() > pBlobs.size() )
     {
-        if(debug) 
-            cout<< " c > p" <<endl;
+        if(debug)             cout<< " c > p" <<endl;
 
         // If there were no blobs in the previous frame.
         if( pBlobs.size() == 0 )
         {
-            if(debug) 
-                cout<< " p = 0" <<endl;
+            if(debug)         cout<< " p = 0" <<endl;
            
             // Go through each blob and add its ID
             for( int i=0; i<cBlobs.size(); i++ )
             {
-                if(debug) 
-                    cout<< "adding ID: " << currentMaxID <<endl;
+                if(debug)     cout<< "adding ID: " << currentMaxID <<endl;
 
                 cBlobs[i].ID = currentMaxID++;
             }             
@@ -88,18 +84,23 @@ void BlobTracker::setIDs(){
             matchIDs_more_or_equal_than_previous();
         }
     }
+    // --------------------------------------------------------------------------
 
-    // 3. N blobs in the current frame == N blobs in the previous frame.
+
+    // 3. N blobs in the current frame == N blobs in the previous frame ---------
     else if( cBlobs.size() == pBlobs.size() )
     {
         matchIDs_more_or_equal_than_previous();
     }
+    // --------------------------------------------------------------------------
 
-    // 4. N blobs in the current frame < N blobs in the previous frame.
+
+    // 4. N blobs in the current frame < N blobs in the previous frame ----------
     if(cBlobs.size() < pBlobs.size())
     {
         matchIDs_less_than_previous();
     }
+    // --------------------------------------------------------------------------
 
 
     if(debug) 
@@ -110,8 +111,6 @@ void BlobTracker::setIDs(){
             cout << "Current ID -> " << cBlobs[i].ID << endl;
         }
     }
-
-    //getchar();
 }
 
 
@@ -122,14 +121,12 @@ void BlobTracker::matchIDs_less_than_previous(){
         float minDistSoFar = maxDistance;
         int indexOfTheClosestBlob = -1;
 
-        if(debug)
-            cout<< "For Loop c_i= " << c_i <<endl;
+        if(debug)            cout<< "For Loop c_i= " << c_i <<endl;
 
         // Go through the blobs of the previous frame 
         for( int p_i=0; p_i<pBlobs.size(); p_i++ )
         {
-            if(debug)
-                cout<< "For Loop p_i= " << p_i <<endl;
+            if(debug)                cout<< "For Loop p_i= " << p_i <<endl;
 
             // Check the distance from the specific blob on the current frame
             //   to the specific blob in the previous frame so we can know what's
@@ -143,8 +140,7 @@ void BlobTracker::matchIDs_less_than_previous(){
                 minDistSoFar = d;
                 indexOfTheClosestBlob = p_i;
 
-                if(debug)
-                    cout<< " MISSING DEBUG MESSAGE HERE! " <<endl;
+                if(debug)                    cout<< " MISSING DEBUG MESSAGE HERE! " <<endl;
             }
         }
 
@@ -187,8 +183,7 @@ void BlobTracker::matchIDs_more_or_equal_than_previous(){
         // Go through the blobs of the current frame 
         for( int c_i=0; c_i<cBlobs.size(); c_i++ )
         {
-            if(debug)
-                cout<< "For Loop c_i= " << c_i <<endl;
+            if(debug)   cout<< "For Loop c_i= " << c_i <<endl;
 
             // Check the distance from the specific blob on the previous frame
             //   to the specific blob in the current frame so we can know what's
@@ -202,8 +197,7 @@ void BlobTracker::matchIDs_more_or_equal_than_previous(){
             {
                 minDistSoFar = d;
                 indexOfTheClosestBlob = c_i;
-                if(debug)
-                    cout<< " minDistSoFar = "<< minDistSoFar << "  ID OfTheClosestBlob: " << pBlobs[p_i].ID <<endl;
+                if(debug)   cout<< " minDistSoFar = "<< minDistSoFar << "  ID OfTheClosestBlob: " << pBlobs[p_i].ID <<endl;
             }
         }
 
@@ -237,21 +231,28 @@ void BlobTracker::updatePreviousBlobs(){
     pBlobs = cBlobs;
 }
 
+void BlobTracker::drawContainers(int x, int y){
+    for(int i=0; i<cBlobs.size(); i++){
+        cBlobs[i].drawContainer(x, y);
+    }
+}
 
-void BlobTracker::draw(int x, int y){
-    for(int i=0; i<cBlobs.size(); i++)
-    {
-        cBlobs[i].draw(x, y);
+void BlobTracker::drawVelocities(int x, int y){
+    for(int i=0; i<cBlobs.size(); i++){
+        cBlobs[i].drawVelocity(x, y);
     }
 }
 
 void BlobTracker::calcVelocities(){
-
     for(int i=0; i<cBlobs.size(); i++){
         cBlobs[i].calcVel();
     }
-
 }
+
+void BlobTracker::setMaxDistance(int md){
+    maxDistance = md;
+}
+
 
 
 

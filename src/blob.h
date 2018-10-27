@@ -9,21 +9,27 @@ class Blob
 {
 	public:
 
-		// VARIABLES
+		// VARIABLES -------------------------------------------------------------
 		ofxCvBlob	blob;
 		int 		ID;
 
-		ofVec2f		p_pos;
-		//ofVec2f		c_pos;
-		ofVec2f		vel;
+		ofVec2f		p_pos; // Previous position. Used to calculate velocity.
+		ofVec2f		vel;   // Velocity.
+
+		ofTrueTypeFont font;	// Font to be used when writing blob's ID on screen.
+		// -----------------------------------------------------------------------
 
 
-		// METHODS
+
+		// METHODS ---------------------------------------------------------------
 		Blob(); 			// Constructor
-		Blob(ofxCvBlob b); // Constructor
+		Blob(ofxCvBlob b);  // Constructor
 
-		void draw(int x, int y);
-		void calcVel();
+		void drawContainer(int x, int y);
+		void drawVelocity(int x, int y);
+
+		void calcVel();		// Calculate the blob's velocity vector
+		// -----------------------------------------------------------------------
 
 	private:	
 };
