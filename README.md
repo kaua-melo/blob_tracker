@@ -7,6 +7,6 @@ It gives IDs to the blobs
 
 and calculates their velocities
 
-![](velocity.gif)
+![](velocityExample.gif)
 
 *The blobs are detected using [ofxOpenCV](https://openframeworks.cc/documentation/ofxOpenCv/)
