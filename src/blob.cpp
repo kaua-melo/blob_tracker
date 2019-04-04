@@ -33,7 +33,7 @@ void Blob::drawContainer(int x, int y)
 
     // Writing the Blob's ID with Big font size (you need verdana.ttf inside your data/  folder)
     font.drawString(to_string(ID), blob.boundingRect.getLeft() + x , 
-                                   blob.boundingRect.getTop()  + y - 5);
+                                   blob.boundingRect.getTop()  + y - 5); 
 
     // Writing the blob's ID with small font size
     //ofDrawBitmapString(to_string(ID), blob.boundingRect.getLeft() + x , 

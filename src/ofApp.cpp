@@ -30,8 +30,8 @@ void ofApp::setup(){
         colorImg.allocate( camera.getWidth(), camera.getHeight() );
 
     #else
-        video.load("movingShapes.mp4");
-        //video.load("velocity.mp4");
+        //video.load("movingShapes.mp4");
+        video.load("velocity.mp4");
 
         video.play();
         video.setLoopState(OF_LOOP_NORMAL);
