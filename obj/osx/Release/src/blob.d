@@ -1,6 +1,6 @@
 obj/osx/Release/src/blob.o: \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/blob.cpp \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/Blob.h \
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/blob.cpp \
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/Blob.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofConstants.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/glew/include/GL/glew.h \
@@ -612,7 +612,7 @@ obj/osx/Release/src/blob.o: \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h
 
-/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/Blob.h:
+/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/Blob.h:
 
 /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h:
 

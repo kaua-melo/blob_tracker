@@ -1,5 +1,5 @@
 obj/osx/Release/src/main.o: \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/main.cpp \
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/main.cpp \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/utils/ofConstants.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/glew/include/GL/glew.h \
@@ -552,7 +552,7 @@ obj/osx/Release/src/main.o: \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/video/ofAVFoundationVideoPlayer.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofCamera.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/ofApp.h \
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/ofApp.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxOpenCv.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvConstants.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
@@ -611,8 +611,8 @@ obj/osx/Release/src/main.o: \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvShortImage.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvContourFinder.h \
   /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/blobTracker.h \
-  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/Blob.h
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/blobTracker.h \
+  /Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/Blob.h
 
 /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/ofMain.h:
 
@@ -1718,7 +1718,7 @@ obj/osx/Release/src/main.o: \
 
 /Users/kaua/Documents/of_v0.9.8_osx_release/libs/openFrameworks/3d/ofEasyCam.h:
 
-/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/ofApp.h:
+/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/ofApp.h:
 
 /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxOpenCv.h:
 
@@ -1836,6 +1836,6 @@ obj/osx/Release/src/main.o: \
 
 /Users/kaua/Documents/of_v0.9.8_osx_release/addons/ofxOpenCv/src/ofxCvHaarFinder.h:
 
-/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/blobTracker.h:
+/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/blobTracker.h:
 
-/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blobTracker/src/Blob.h:
+/Users/kaua/Documents/of_v0.9.8_osx_release/apps/myApps/blob_tracker/src/Blob.h:

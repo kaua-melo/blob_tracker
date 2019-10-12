@@ -3,8 +3,7 @@
 
 TODO
 --------------
--
-
+- When a blob just appear in the scene, its velocity goes crazy. Try to set the velocity to zero in case the blob just appeared to the scene.
 
 NEEDS
 --------------

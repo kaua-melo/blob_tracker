@@ -5,7 +5,7 @@
 #include "blobTracker.h"
 
 
-//#define _USE_LIVE_VIDEO		// uncomment this to use a live camera instead of a video file.
+// #define _USE_LIVE_VIDEO		// uncomment this to use a live camera instead of a video file.
 
 class ofApp : public ofBaseApp{
 	public:

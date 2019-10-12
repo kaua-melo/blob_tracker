@@ -38,7 +38,10 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
     setIDs();
 
     // Calculate blobs' velocities if desired
-    if(calcVel) calcVelocities();
+    if(calcVel) 
+    {
+        calcVelocities();
+    }
 
     // Update the previous frame blobs to the current frame
     updatePreviousBlobs();
@@ -244,6 +247,7 @@ void BlobTracker::drawVelocities(int x, int y){
 }
 
 void BlobTracker::calcVelocities(){
+    
     for(int i=0; i<cBlobs.size(); i++){
         cBlobs[i].calcVel();
     }
@@ -252,7 +256,3 @@ void BlobTracker::calcVelocities(){
 void BlobTracker::setMaxDistance(int md){
     maxDistance = md;
 }
-
-
-
-

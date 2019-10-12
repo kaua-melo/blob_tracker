@@ -1,20 +1,27 @@
 
-
 #include "Blob.h"
 
 Blob::Blob(){
     ID = -1;
     
     vel.set(0, 0);
-    p_pos.set( blob.centroid.x, 
-               blob.centroid.y);
+
+    //p_pos.set( blob.centroid.x, 
+    //           blob.centroid.y);
 
     font.loadFont("verdana.ttf", 15); //(you need verdana.ttf inside your bin/data/  folder)
 }
 
 
 Blob::Blob(ofxCvBlob b):Blob(){ // We are calling the Blob() constructor here too, so we set its ID, vel, etc...
+                                // It first executes Blob(), then it executes Blob(ofxCvBlob b)
+
     blob = b;
+
+    // It's important to set the previous position of the blob to its current poisition so it 
+    //  calculates the velocity for the first frame properly.
+    p_pos.set( blob.centroid.x, 
+               blob.centroid.y);
 }
 
 
