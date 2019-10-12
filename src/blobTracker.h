@@ -6,6 +6,21 @@
 #include "ofxOpenCv.h"
 #include "Blob.h"
 
+/*
+Here's how this class should be used:
+
+- You create a blobTracker object.
+- You get a frame of your video, transform it to gray scale, and make the difference with a previsouly saved background.
+- You pass this gray scale Difference image to "findBlobs(grayDiff, 10, (width*height)/3, 5, false)".
+- For every time the findBlobs(...) function is called:
+	- the cBlobs is cleaned, and refilled with other brand new blobs.
+	- Their IDs are set based on the blobs detected on the previous frame (the closest blob to a previous blob will be set to that ID and to its previous position so we can calculate its velocity properly).
+	- Calculate the velocity of the blobs.
+	- Update the previousBlob vector to the current blobs vector.
+
+*/
+
+
 class BlobTracker
 {
 	public:
