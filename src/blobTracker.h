@@ -5,6 +5,7 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "Blob.h"
+#include <map>
 
 /*
 Here's how this class should be used:
@@ -15,6 +16,7 @@ Here's how this class should be used:
 - For every time the findBlobs(...) function is called:
 	- the cBlobs is cleaned, and refilled with other brand new blobs.
 	- Their IDs are set based on the blobs detected on the previous frame (the closest blob to a previous blob will be set to that ID and to its previous position so we can calculate its velocity properly).
+	- Once they have their IDs set, we populate the map (a dictionary). A dictionary <ID, Blob> which is how the blobs should be accessed outside blobTracker.
 	- Calculate the velocity of the blobs.
 	- Update the previousBlob vector to the current blobs vector.
 
@@ -30,6 +32,12 @@ class BlobTracker
 
 		vector<Blob>	pBlobs;  // Blobs from previous frame
 		vector<Blob>	cBlobs;  // Blobs on the current frame
+
+		// Dictionary which will contain the blobs from the current frame and their respective IDS.
+		// This can be useful when creating some object that should follow a blob and that should not
+		//  be created every single frame. For example: a perlin noise grid.
+		// Whenever you are going to access the blobs outside blobTracker, you should use this map.
+		map<int, Blob> cBlobs_dict; 
 
 		// The ID of the blobs can be [0, 1, 2, 7, 8, 30]. 
 		//  currentMaxID == 30 so we know that the next blob should have ID 31

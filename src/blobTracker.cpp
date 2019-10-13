@@ -29,6 +29,8 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
     // Clear our cBlobs vector
     cBlobs.clear();
 
+    cBlobs_dict.clear();
+
     // Pushing each blob to our vector of Blobs
     for( int i=0; i<contourFinder.nBlobs; i++ ){
         cBlobs.push_back( Blob(contourFinder.blobs[i]) );
@@ -37,9 +39,14 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
     // Set IDS
     setIDs();
 
+    // Now that the blobs all have IDs, we populate our dictionary using their
+    //  IDs as the key.
+    for( int i=0; i<cBlobs.size(); i++){
+        cBlobs_dict[cBlobs[i].ID] = cBlobs[i];
+    }
+
     // Calculate blobs' velocities if desired
-    if(calcVel) 
-    {
+    if(calcVel) {
         calcVelocities();
     }
 
@@ -235,21 +242,29 @@ void BlobTracker::updatePreviousBlobs(){
 }
 
 void BlobTracker::drawContainers(int x, int y){
-    for(int i=0; i<cBlobs.size(); i++){
-        cBlobs[i].drawContainer(x, y);
+
+    map<int, Blob>::iterator it;
+    for( it = cBlobs_dict.begin(); it != cBlobs_dict.end(); it++ )
+    {
+        it->second.drawContainer(x, y);
     }
 }
 
 void BlobTracker::drawVelocities(int x, int y){
-    for(int i=0; i<cBlobs.size(); i++){
-        cBlobs[i].drawVelocity(x, y);
+
+    map<int, Blob>::iterator it;
+    for( it = cBlobs_dict.begin(); it != cBlobs_dict.end(); it++ )
+    {
+        it->second.drawVelocity(x, y);
     }
 }
 
 void BlobTracker::calcVelocities(){
-    
-    for(int i=0; i<cBlobs.size(); i++){
-        cBlobs[i].calcVel();
+
+    map<int, Blob>::iterator it;
+    for( it = cBlobs_dict.begin(); it != cBlobs_dict.end(); it++ )
+    {
+        it->second.calcVel();
     }
 }
 
