@@ -31,9 +31,7 @@ class BlobTracker
 		vector<Blob>	pBlobs;  // Blobs from previous frame
 		vector<Blob>	cBlobs;  // Blobs on the current frame
 
-		vector<int>		blobs_ID;
-
-		// The IDS can be [0, 1, 2, 7, 8, 30]. 
+		// The ID of the blobs can be [0, 1, 2, 7, 8, 30]. 
 		//  currentMaxID == 30 so we know that the next blob should have ID 31
 		int currentMaxID;	
 
