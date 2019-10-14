@@ -36,6 +36,33 @@ void BlobTracker::findBlobs(ofxCvGrayscaleImage &im, int minArea, int maxArea, i
         cBlobs.push_back( Blob(contourFinder.blobs[i]) );
     }
 
+    // Check whether a blob is inside another blob.
+    //  If that happens, let's delete the smaller blob.
+    // THIS IS NOT WORKING FINE AND IS BROKING THE CODE
+    /*
+    vector<int> index_of_blobs_to_delete;
+    for(int i=0; i<cBlobs.size(); i++){
+        for(int z=0; z<cBlobs.size(); z++){
+
+            // if cBlobs[i] is inside cBlobs[z]
+            if( cBlobs[i].blob.boundingRect.getLeft()   >  cBlobs[z].blob.boundingRect.getLeft() &&
+                cBlobs[i].blob.boundingRect.getRight()  <  cBlobs[z].blob.boundingRect.getRight() &&
+                cBlobs[i].blob.boundingRect.getTop()    >  cBlobs[z].blob.boundingRect.getTop() &&
+                cBlobs[i].blob.boundingRect.getBottom() <  cBlobs[z].blob.boundingRect.getBottom() ){
+                    index_of_blobs_to_delete.push_back(i);
+            }
+        }
+    }
+
+    // Deleting the blobs which are inside another blob
+    for(int i=0; i < index_of_blobs_to_delete.size(); i++){
+        //cBlobs.erase( cBlobs.begin() + index_of_blobs_to_delete[i] );
+        cout << index_of_blobs_to_delete[i] << "    ";
+    }
+    cout << endl;
+    index_of_blobs_to_delete.clear();
+    */
+
     // Set IDS
     setIDs();
 

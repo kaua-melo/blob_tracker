@@ -17,6 +17,10 @@ class Blob
 		ofVec2f		vel;   // Velocity.
 
 		ofTrueTypeFont font;	// Font to be used when writing blob's ID on screen.
+		float maxVelocity; // Blobs with velocities which are greater than 'maxVelocity' 
+						   //  will be set to vel zero. This is an attempt to avoid crazy
+						   //  velocities which appear sometimes randomly. You are not sure
+						   //  why this happen yet.
 		// -----------------------------------------------------------------------
 
 

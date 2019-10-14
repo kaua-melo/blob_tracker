@@ -10,6 +10,8 @@ Blob::Blob(){
     //           blob.centroid.y);
 
     font.loadFont("verdana.ttf", 15); //(you need verdana.ttf inside your bin/data/  folder)
+
+    maxVelocity = 8;
 }
 
 
@@ -58,11 +60,15 @@ void Blob::drawVelocity(int x, int y)
 
 void Blob::calcVel(){
     
-    vel.set( blob.centroid.x - p_pos.x, 
-             blob.centroid.y - p_pos.y );
+    ofVec2f v( blob.centroid.x - p_pos.x, 
+               blob.centroid.y - p_pos.y );
+
+    // Here we set a maximum velocity. If the velocity is
+    //  greater than this threshold, we set it to zero.
+    if(v.length() < maxVelocity){
+        vel.set(v.x, v.y);
+    }
+    else{
+        vel.set(0, 0);  
+    }
 }
-
-
-
-
-
